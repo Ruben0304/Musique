@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.notifications.NotificationsFragment">
+
+    <ImageView
+        android:id="@+id/blur"
+        android:layout_width="409dp"
+        android:layout_height="893dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/captura_de_pantalla_2024_04_09_200017"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CD000000">
+
+    </FrameLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardPoster"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="-15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.57"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.94">
+
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cropToPadding="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/player_cover" />
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/listaRep"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="3dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardPoster"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.4">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#847B77"
+            android:gravity="center"
+            android:text="Lista de reproducción"
+            android:textAlignment="center" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/listaRepfdf"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="192dp"
+        android:layout_marginTop="20dp"
+        android:background="#847B77"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="3dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardPoster"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.25">
+
+        <TextView
+            android:id="@+id/textView3o"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#847B77"
+            android:gravity="center"
+            android:text="Letra"
+            android:textAlignment="center" />
+    </androidx.cardview.widget.CardView>
+
+    <SeekBar
+        android:id="@+id/seekBar2"
+        android:layout_width="386dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="44dp"
+        android:progressTint="#FAF9F9"
+        android:thumbTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.85" />
+
+    <LinearLayout
+
+
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.439"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.90">
+
+
+        <TextView
+            android:id="@+id/textViewp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/archivo_semibold"
+            android:foregroundTint="#FF98A9"
+            android:text="00:13"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#66FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtArtist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/archivo_semibold"
+            android:foregroundTint="#FF98A9"
+            android:text="00:13"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#B2FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/archivo_semibold"
+            android:foregroundTint="#FF98A9"
+            android:text="00:13"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#FF98A9"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewwww"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/archivo_semibold"
+            android:foregroundTint="#FF98A9"
+            android:text="00:13"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#B2FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textVieww"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/archivo_semibold"
+            android:foregroundTint="#FF98A9"
+            android:text="00:13"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#66FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.90">
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:drawableBottom="@drawable/player_control_play"
+            app:icon="@drawable/player_control_repeat"
+            app:iconTint="#FFFFFF" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:drawableBottom="@drawable/player_control_play"
+            app:icon="@drawable/player_control_before"
+            app:iconTint="#FFFFFF" />
+
+        <Button
+            android:id="@+id/play_pause"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:drawableBottom="@drawable/player_control_play"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:icon="@drawable/player_control_play"
+            app:iconTint="#FFFFFF" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:drawableBottom="@drawable/player_control_next"
+            app:icon="@drawable/player_control_next"
+            app:iconTint="#FFFFFF" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:drawableBottom="@drawable/player_control_play"
+            app:icon="@drawable/trazado_1769"
+            app:iconTint="#FFFFFF" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:descendantFocusability="blocksDescendants"
+    tools:context=".ui.player.Player">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#B2000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardPoster"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.94">
+
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:scaleType="centerCrop" />
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/listaRep"
+        android:layout_width="143dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="#B42C2525"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardPoster"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00FFFFFF"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="38dp"
+                android:layout_height="wrap_content"
+                android:padding="7dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/icono_centro_de_descarga" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:fontFamily="@font/poppins_light"
+                android:gravity="center"
+                android:paddingEnd="20dp"
+                android:text="Descargar"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/listaRepfdf"
+        android:layout_width="141dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="192dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="#B42C2525"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="5dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardPoster"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.25">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00FFFFFF"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/imageView998989"
+                android:layout_width="38dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/share_rounded" />
+
+            <TextView
+                android:id="@+id/textView09"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppins_light"
+                android:gravity="center"
+                android:paddingEnd="20dp"
+                android:text="Compartir"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <SeekBar
+        android:id="@+id/seekBar2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hapticFeedbackEnabled="true"
+        android:indeterminate="false"
+        android:indeterminateBehavior="repeat"
+        android:indeterminateTint="#00FFFFFF"
+        android:max="100"
+        android:progressTint="#00FFFFFF"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarFadeDuration="20"
+        android:secondaryProgressTint="#00FFFFFF"
+        android:splitTrack="false"
+        android:thumb="@drawable/elipse_30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.90" />
+
+    <LinearLayout
+
+
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listaRepfdf"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.90">
+
+
+        <TextView
+            android:id="@+id/textViewp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_light"
+            android:foregroundTint="#FF98A9"
+            android:text="00:13"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#66FFFFFF"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtArtist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_light"
+            android:foregroundTint="#FF98A9"
+            android:text="00:13"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#B2FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_light"
+            android:foregroundTint="#FF98A9"
+            android:text="00:13"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#FF98A9"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewwww"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_light"
+            android:foregroundTint="#FF98A9"
+            android:text="00:13"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#B2FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textVieww"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_light"
+            android:foregroundTint="#FF98A9"
+            android:text="00:13"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#66FFFFFF"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.90">
+
+        <ImageButton
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            android:src="@drawable/player_control_repeat" />
+
+        <ImageButton
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            android:src="@drawable/player_control_before" />
+
+        <ImageButton
+            android:id="@+id/play_pause"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:insetLeft="7dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/player_control_play"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            app:iconTint="#FFFFFF" />
+
+        <ImageButton
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            android:src="@drawable/player_control_next" />
+
+        <ImageButton
+            android:id="@+id/button5"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="#00FFFFFF"
+            android:scaleType="centerInside"
+            android:src="@drawable/trazado_1769" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins_light"
+        android:foregroundTint="#FF98A9"
+        android:text="Eladio Carrion"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
+
+    <TextView
+        android:id="@+id/txtArtista"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins_light"
+        android:foregroundTint="#FF98A9"
+        android:text="Eladio Carrion"
+        android:textAlignment="viewStart"
+        android:textAllCaps="true"
+        android:textColor="#A9EEEEEE"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
+
+    <TextView
+        android:id="@+id/txtDuracion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="36dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins_light"
+        android:foregroundTint="#FF98A9"
+        android:text="2:50"
+        android:textAlignment="viewEnd"
+        android:textAllCaps="true"
+        android:textColor="#EAEAEA"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,153 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <!-- Barra de reproducción en la parte inferior con CardView -->
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="336dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="464dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/grupo_10391" />
+
+    <LinearLayout
+        android:id="@+id/playing_now_bar"
+        android:layout_width="0dp"
+        android:layout_height="86dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="13dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageButton
+            android:id="@+id/btn_more"
+            android:layout_width="49dp"
+            android:layout_height="34dp"
+
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="more"
+            android:focusable="false"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_more" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/playing_now_card"
+            android:layout_width="234dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="8dp">
+
+            <ImageView
+                android:id="@+id/current_track_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/album_cover" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/contrast" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="215dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="-250dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="40dp">
+
+                    <TextView
+                        android:id="@+id/current_track_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Poblado"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/current_track_artist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="J Balvin, Karol G, Nicky Jam"
+                        android:textColor="#B3FFFFFF"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/btnAmpliar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#00FFFFFF"
+                    app:srcCompat="@drawable/grupo_10373" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <ImageButton
+            android:id="@+id/btn_line"
+            android:layout_width="44dp"
+            android:layout_height="27dp"
+
+            android:background="?android:attr/selectableItemBackground"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_min" />
+
+    </LinearLayout>
+
+    <com.example.myapplication.ui.shared.MenuComponent
+        android:id="@+id/menu_nav"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</RelativeLayout>

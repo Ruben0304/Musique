@@ -1,0 +1,18 @@
+Fragment/Activity:
+Gestión de UI: Todo lo relacionado con la presentación de la interfaz de usuario, como inflar layouts, manejar eventos de vistas (clicks, scrolls, etc.), y mostrar datos en la pantalla.
+Ciclo de vida: Manejar eventos específicos del ciclo de vida de Android, como onCreate, onStart, onResume, onPause, onStop, y onDestroy.
+Navegación: Iniciar otras actividades, mostrar fragmentos y manejar transiciones y animaciones.
+Permisos: Solicitar y manejar permisos en tiempo de ejecución.
+Intents: Manejar intents entrantes y resultados de actividades (startActivityForResult).
+Recursos de Android: Acceder a recursos del sistema como Context, Resources, y SharedPreferences.
+Adaptadores: Configurar adaptadores para listas o recicladores (como RecyclerView.Adapter).
+Vistas: Actualizar vistas con datos proporcionados por el ViewModel.
+
+
+ViewModel:
+Lógica de negocio: Contiene la lógica de negocio y toma decisiones basadas en los datos de la aplicación.
+Gestión de datos: Solicitar datos a repositorios o servicios, y preparar esos datos para ser mostrados por la UI.
+Estado de la UI: Mantener el estado de la UI que puede ser necesario conservar a través de cambios de configuración, como rotaciones de pantalla.
+LiveData/Flow: Exponer datos a la UI a través de LiveData o Flow para que la Activity/Fragment pueda observar y reaccionar a los cambios.
+Corrutinas: Manejar operaciones asíncronas y largas ejecuciones con corrutinas.
+Transformación de datos: Convertir datos brutos en formatos útiles para la UI, como listas de elementos para mostrar en un RecyclerView.

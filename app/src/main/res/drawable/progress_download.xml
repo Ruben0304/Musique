@@ -1,0 +1,25 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fondo del círculo -->
+    <item>
+        <shape android:shape="ring"
+            android:innerRadiusRatio="2.5"
+            android:thicknessRatio="15"
+            android:useLevel="false">
+            <solid android:color="#00FFFFFF" /> <!-- Color transparente para el fondo -->
+        </shape>
+    </item>
+
+    <!-- Progreso del círculo -->
+    <item>
+        <rotate
+            android:fromDegrees="270"
+            android:toDegrees="270">
+            <shape android:shape="ring"
+                android:innerRadiusRatio="2.5"
+                android:thicknessRatio="15"
+                android:useLevel="true"> <!-- UseLevel es true para dibujar el progreso -->
+                <solid android:color="#FA2D2D" /> <!-- Color del progreso -->
+            </shape>
+        </rotate>
+    </item>
+</layer-list>

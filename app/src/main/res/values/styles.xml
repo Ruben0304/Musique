@@ -1,0 +1,32 @@
+<resources>
+
+    <style name="Widget.Theme.MyApplication.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="Widget.Theme.MyApplication.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/scale_up</item>
+        <item name="android:windowExitAnimation">@anim/scale_down</item>
+    </style>
+
+    <style name="Theme.DialogLike" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item> <!-- No title -->
+        <item name="android:windowActionBar">false</item> <!-- No action bar -->
+        <item name="android:windowFullscreen">true</item> <!-- Full screen mode -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+
+
+
+</resources>
