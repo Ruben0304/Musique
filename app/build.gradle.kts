@@ -83,6 +83,8 @@ dependencies {
     implementation(libs.exoplayer)
     implementation(libs.hokofly.hoko.blur)
     implementation(libs.timber)
+    implementation(libs.androidx.palette)
+
 
 
 

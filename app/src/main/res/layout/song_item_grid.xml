@@ -14,8 +14,8 @@
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="143dp"
-            android:layout_height="150dp"
+            android:layout_width="172dp"
+            android:layout_height="185dp"
             app:cardBackgroundColor="#00FFFFFF"
             app:cardCornerRadius="16dp"
             app:cardPreventCornerOverlap="true">
@@ -29,19 +29,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="13dp">
-
-
-                <ImageButton
-                    android:id="@+id/playGrid"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_gravity="bottom|end"
-                    android:background="#00FFFFFF"
-                    android:scaleType="centerInside"
-                    app:srcCompat="@drawable/icon_playall" />
-
-            </FrameLayout>
+                android:padding="13dp" />
         </androidx.cardview.widget.CardView>
 
         <TextView

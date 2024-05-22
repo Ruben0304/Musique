@@ -51,18 +51,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadingBar = view.findViewById(R.id.progressBar2)
-        scroll = view.findViewById(R.id.scrollView)
-        val cover = view.findViewById<ImageView>(R.id.cover)
-        Glide.with(view)
-            .load("https://is1-ssl.mzstatic.com/image/thumb/Video116/v4/a3/87/a1/a387a1e7-ec57-a97b-5161-6a29180fbcdb/Job9319765c-f2fa-4be5-8a9c-2f26ff99627e-157945606-PreviewImage_preview_image_nonvideo_sdr-Time1698718820409.png/316x316bb.webp")
-            .into(cover)
 
-        cover.setOnClickListener {
-            val intent = Intent(context, Album::class.java).apply {
-                putExtra("id", 6767) // Reemplaza `someId` con el ID real que necesitas pasar
-            }
-            context?.startActivity(intent)
-        }
+
+
+
 
         // Inicializar los TextViews
         tvInicio = view.findViewById(R.id.textView333)
@@ -77,7 +69,7 @@ class HomeFragment : Fragment() {
         // Configurar los listeners
        setNavigationItemListeners()
         setupRecyclerView(view)
-        setupSearch(view)
+//        setupSearch(view)
         observeViewModel()
     }
 
@@ -110,7 +102,7 @@ class HomeFragment : Fragment() {
     private fun setupRecyclerView(view: View) {
         recyclerView = view.findViewById(R.id.recycler_view_songs)
         // Ahora también pasas this como listener
-        adapter = SongAdapter(true, false)
+        adapter = SongAdapter(false, false)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.adapter = adapter
     }
@@ -121,40 +113,40 @@ class HomeFragment : Fragment() {
         }
         homeViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             loadingBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-            scroll.visibility = if (isLoading) View.GONE else View.VISIBLE
+            recyclerView.visibility = if (isLoading) View.GONE else View.VISIBLE
         }
     }
 
-    private fun setupSearch(view: View) {
-        val editTextSearch: EditText = view.findViewById(R.id.etSearch)
-        editTextSearch.setOnEditorActionListener { v, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                val query = v.text.toString()
-                if (query.isNotEmpty()) {
-                    homeViewModel.searchTracks(query)
-
-                    // Configura el RecyclerView para que ocupe todo el espacio disponible (match_parent)
-                    val inflater = LayoutInflater.from(view.context)
-
-                    // Inflar el nuevo ConstraintLayout desde search_fragment.xml
-                    val newConstraintLayout = inflater.inflate(R.layout.fragment_search, scroll, false) as ConstraintLayout
-
-                    // Remover todos los hijos actuales del ScrollView
-                    scroll.removeAllViews()
-
-                    // Añadir el nuevo ConstraintLayout al ScrollView
-                    scroll.addView(newConstraintLayout)
-                    val recyclerView2 = newConstraintLayout.findViewById<RecyclerView>(R.id.recyclerViewCanciones)
-                    adapter.updateList(emptyList(), true, true)  // Cambia a modo lista
-                    recyclerView2.layoutManager = LinearLayoutManager(requireContext())
-                    recyclerView2.adapter = adapter
-                }
-                true
-            } else {
-                false
-            }
-        }
-    }
+//    private fun setupSearch(view: View) {
+//        val editTextSearch: EditText = view.findViewById(R.id.etSearch)
+//        editTextSearch.setOnEditorActionListener { v, actionId, _ ->
+//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                val query = v.text.toString()
+//                if (query.isNotEmpty()) {
+//                    homeViewModel.searchTracks(query)
+//
+//                    // Configura el RecyclerView para que ocupe todo el espacio disponible (match_parent)
+//                    val inflater = LayoutInflater.from(view.context)
+//
+//                    // Inflar el nuevo ConstraintLayout desde search_fragment.xml
+//                    val newConstraintLayout = inflater.inflate(R.layout.fragment_search, scroll, false) as ConstraintLayout
+//
+//                    // Remover todos los hijos actuales del ScrollView
+//                    scroll.removeAllViews()
+//
+//                    // Añadir el nuevo ConstraintLayout al ScrollView
+//                    scroll.addView(newConstraintLayout)
+//                    val recyclerView2 = newConstraintLayout.findViewById<RecyclerView>(R.id.recyclerViewCanciones)
+//                    adapter.updateList(emptyList(), true, true)  // Cambia a modo lista
+//                    recyclerView2.layoutManager = LinearLayoutManager(requireContext())
+//                    recyclerView2.adapter = adapter
+//                }
+//                true
+//            } else {
+//                false
+//            }
+//        }
+//    }
 
     private fun goToChartFragment() {
         if (activity != null) {

@@ -2,19 +2,31 @@ package com.example.myapplication
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
+import android.transition.Transition
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.cardview.widget.CardView
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
+import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.SimpleTarget
 import com.example.myapplication.databinding.ActivityMainBinding
 
 import com.example.myapplication.service.AudioPlayer
@@ -25,6 +37,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val trackViewModel: TrackViewModel by viewModels()
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,80 +49,75 @@ class MainActivity : AppCompatActivity() {
         AudioPlayer.initializePlayer(this)
         hideSystemUI()
 
-
-
-
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController = navHostFragment.navController
 
-
-        // Encuentra el layout que contiene el botón
         val includedLayout: View = findViewById(R.id.include_playing_bar)
 
-        val current_track_image: ImageView = includedLayout.findViewById(R.id.current_track_image)
 
+        // Observa el LiveData para cambios en la imagen de la pista actual
+        val cardView: CardView = findViewById(R.id.playing_now_card)
+        val currentTrackImage: ImageView = findViewById(R.id.current_track_image)
+        val menuNav: View = includedLayout.findViewById(R.id.menu_nav)
+        val caverMenuImg: ImageView = menuNav.findViewById(R.id.imageView3)
+        val currentTrackImageM: ImageView = menuNav.findViewById(R.id.current_track_image)
 
+// Observa el LiveData para cambios en la imagen de la pista actual
+        trackViewModel.currentTrackImage.observe(this, Observer { imageUrl ->
+            Glide.with(this)
+                .asBitmap()
+                .load(imageUrl)
+                .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 10)))
+                .into(currentTrackImage)
+
+            Glide.with(this)
+                .asBitmap()
+                .load(imageUrl)
+                .apply(RequestOptions.bitmapTransform(BlurTransformation(35, 20)))
+                .into(caverMenuImg)
+
+            Glide.with(this)
+                .asBitmap()
+                .load(imageUrl)
+                .into(currentTrackImageM)
+
+//            // Después de cargar la imagen, utiliza Palette para extraer el color predominante
+//            currentTrackImage.post {
+//                val bitmap = (currentTrackImage.drawable as BitmapDrawable).bitmap
+//                Palette.from(bitmap).generate { palette ->
+//                    val dominantColor = palette?.getDominantColor(Color.RED) ?: Color.RED
+//
+//                    // Crea un nuevo GradientDrawable con el color predominante
+//                    val drawable = GradientDrawable().apply {
+//                        shape = GradientDrawable.RECTANGLE
+//                        setColor(dominantColor) // Establece el color de fondo
+//                        cornerRadius = 50f // Debe coincidir con el radio de la tarjeta
+//                    }
+//
+//                    // Establece el nuevo drawable como fondo de cardView
+//                    cardView.background = drawable
+//                }
+//            }
+        })
 
         val btnAmpliar: ImageButton = includedLayout.findViewById(R.id.btnAmpliar)
-
-
-        // Encuentra el layout del menú que quieres mostrar/ocultar
-        val menuNav: View = includedLayout.findViewById(R.id.menu_nav)
 
         val imgTransp: ImageView = menuNav.findViewById(R.id.imageView8)
 
 
-        Glide.with(includedLayout)
-            .load(R.drawable.album_cover) // Reemplaza con tu drawable o uri
-            .apply(RequestOptions.bitmapTransform(BlurTransformation(25,10))) // Ajusta el radio y el muestreo
-            .into(current_track_image)
 
         btnAmpliar.setOnClickListener {
-            // Cambiar la visibilidad del menú
             imgTransp.visibility = View.VISIBLE
-            menuNav.visibility =   if (menuNav.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            menuNav.visibility = if (menuNav.visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
         }
-
-
-
-        // Asumiendo que estás dentro de una Activity
-//        btnAmpliar.setOnClickListener {
-//
-//            if (ReproductorMusica.obtenerCancionActual() != null) {
-//                val intent = Intent(this, Player::class.java)
-//                startActivity(intent)
-//                overridePendingTransition(
-//                    com.google.android.material.R.anim.abc_popup_enter,
-//                    com.google.android.material.R.anim.abc_popup_exit
-//                )
-//            }
-//            else{
-//                // Mostrar un diálogo indicando que no hay música reproduciéndose
-//                val builder = AlertDialog.Builder(this)
-//                builder.setTitle("Sin reproducción")
-//                builder.setMessage("Actualmente no se está reproduciendo ninguna canción.")
-//                builder.setPositiveButton("OK") { dialog, which ->
-//                    dialog.dismiss()
-//                }
-//                val dialog: AlertDialog = builder.create()
-//                dialog.show()
-//            }
-//
-//        }
-
-
-
     }
+
     @RequiresApi(Build.VERSION_CODES.P)
     fun hideSystemUI() {
         window.attributes.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
         window.decorView.systemUiVisibility = (
-
-
-                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                 )
     }
-
 }
