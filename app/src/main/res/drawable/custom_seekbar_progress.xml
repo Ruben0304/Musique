@@ -1,0 +1,21 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background gris -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="#4E464A"/> <!-- Color gris -->
+            <corners android:radius="10dp"/> <!-- Radio de las esquinas -->
+        </shape>
+    </item>
+
+    <!-- Progress blanco hasta el progreso actual -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <solid android:color="#FFFFFF"/> <!-- Color blanco -->
+                <corners android:radius="10dp"/> <!-- Radio de las esquinas -->
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

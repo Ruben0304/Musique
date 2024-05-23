@@ -86,6 +86,6 @@
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/grupo_10384" />
+        app:srcCompat="@drawable/design_component_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

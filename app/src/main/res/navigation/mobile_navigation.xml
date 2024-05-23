@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/fragment_search"
-        android:name="com.example.yourapp.FragmentSearch"
+        android:name="com.example.myapplication.ui.search.SearchFragment"
         android:label="Search" />
 
 

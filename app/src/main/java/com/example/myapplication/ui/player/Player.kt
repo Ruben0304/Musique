@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -12,7 +13,10 @@ import android.os.Looper
 import android.provider.MediaStore
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
@@ -40,7 +44,9 @@ import java.io.OutputStream
 class Player : AppCompatActivity() {
 
     private lateinit var viewModel: PlayerViewModel
-
+    private lateinit var volSeekBar: SeekBar
+    private lateinit var contraste: ImageView
+    private lateinit var volButton: ImageButton
     private lateinit var textViewp: TextView
     private lateinit var txtTitulo: TextView
     private lateinit var txtArtista: TextView
@@ -66,7 +72,7 @@ class Player : AppCompatActivity() {
 
     private fun updateUI(songInfo: Song) {
         val listaRepfdf = findViewById<CardView>(R.id.listaRepfdf)
-        songInfo?.let {
+        songInfo.let {
             txtTitulo.text = it.title
             txtArtista.text = it.artist.name
             txtDuracion.text = formatTime(it.duration.toLong())
@@ -110,7 +116,7 @@ class Player : AppCompatActivity() {
         playPauseButton.setOnClickListener {
             if (AudioPlayer.isPlaying()) {
                 AudioPlayer.pause()
-                playPauseButton.setImageResource(R.drawable.player_control_play)  // Cambia a icono de play
+                playPauseButton.setImageResource(R.drawable.player_control_pause_play)  // Cambia a icono de play
             } else {
                 AudioPlayer.resume()
                 playPauseButton.setImageResource(R.drawable.icon_pause) // Cambia a icono de pause
@@ -141,6 +147,43 @@ class Player : AppCompatActivity() {
 
         ReproductorMusica.obtenerCancionActual()?.let { updateUI(it) }
 
+        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+
+// Obtener el volumen actual del dispositivo
+        val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+        val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+
+// Configurar el progreso del SeekBar con el volumen actual
+        volSeekBar.progress = (currentVolume * 100 / maxVolume)
+
+// Establecer un OnSeekBarChangeListener para detectar cambios en el progreso del SeekBar
+        volSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                // Si el cambio es iniciado por el usuario, ajustar el volumen del dispositivo
+                if (fromUser) {
+                    val newVolume = (progress * maxVolume) / 100
+                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, newVolume, 0)
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                // No necesitamos hacer nada aquí
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                // No necesitamos hacer nada aquí
+            }
+        })
+
+        volButton.setOnClickListener {
+            cambiarVisibilidadVolumen()
+        }
+
+        contraste.setOnClickListener {
+            cambiarVisibilidadVolumen()
+        }
+
+
 
 
 
@@ -157,6 +200,9 @@ class Player : AppCompatActivity() {
         textViewwww = findViewById(R.id.textViewwww)
         textVieww = findViewById(R.id.textVieww)
         seekBar = findViewById(R.id.seekBar2)
+        volSeekBar= findViewById(R.id.volumen)
+        contraste= findViewById(R.id.fondo_contraste)
+        volButton = findViewById(R.id.volButton)
 
 
 
@@ -218,6 +264,30 @@ class Player : AppCompatActivity() {
 
 
 
+    }
+
+    private fun cambiarVisibilidadVolumen() {
+        if (volSeekBar.visibility == View.VISIBLE) {
+            val fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out)
+            fadeOut.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {}
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    volSeekBar.visibility = View.GONE
+                    contraste.visibility = View.GONE
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {}
+            })
+            volSeekBar.startAnimation(fadeOut)
+
+        } else {
+            val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+            volSeekBar.visibility = View.VISIBLE
+            contraste.visibility = View.VISIBLE
+            volSeekBar.startAnimation(fadeIn)
+
+        }
     }
 
     private fun updateTextViews(progress: Long) {

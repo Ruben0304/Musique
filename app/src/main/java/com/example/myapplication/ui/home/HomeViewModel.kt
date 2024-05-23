@@ -13,9 +13,9 @@ import kotlinx.coroutines.launch
 
 
 class HomeViewModel(
-    private val songService: ISongSearchService = SongSearchService()
 ) : ViewModel() {
 
+    private val songService: ISongSearchService = SongSearchService()
     private val _cancionesLiveData = MutableLiveData<List<Song>>()
     val cancionesLiveData: LiveData<List<Song>> = _cancionesLiveData
 
