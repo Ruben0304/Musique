@@ -9,8 +9,17 @@
         android:id="@+id/fragment_home"
         android:name="com.example.myapplication.ui.home.HomeFragment"
         android:label="fragment_home">
+        <action
+            android:id="@+id/action_home_to_search"
+            app:destination="@id/fragment_search" />
 
     </fragment>
+
+
+    <fragment
+        android:id="@+id/fragment_search"
+        android:name="com.example.yourapp.FragmentSearch"
+        android:label="Search" />
 
 
 

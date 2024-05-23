@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.ScrollView
@@ -16,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,9 +36,10 @@ class HomeFragment : Fragment() {
     private lateinit var scroll: ScrollView
     private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var loadingBar: ProgressBar
+    private lateinit var searchButton: ImageButton
 
 //navegacion
-    private lateinit var tvInicio: TextView
+//    private lateinit var tvInicio: TextView
     private lateinit var tvBiblioteca: TextView
     private lateinit var tvDescargas: TextView
     private lateinit var tvCharts: TextView
@@ -51,13 +54,17 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadingBar = view.findViewById(R.id.progressBar2)
+        searchButton = view.findViewById(R.id.search_button)
 
 
 
+        searchButton.setOnClickListener {
+            findNavController().navigate(R.id.action_home_to_search)
+        }
 
 
         // Inicializar los TextViews
-        tvInicio = view.findViewById(R.id.textView333)
+//        tvInicio = view.findViewById(R.id.textView333)
         tvBiblioteca = view.findViewById(R.id.textView5)
         tvDescargas = view.findViewById(R.id.textView4)
         tvCharts = view.findViewById(R.id.textView3)
@@ -75,7 +82,7 @@ class HomeFragment : Fragment() {
 
 
     private fun setNavigationItemListeners() {
-        val allTextViews = listOf(tvInicio, tvBiblioteca, tvDescargas)
+        val allTextViews = listOf(tvBiblioteca, tvDescargas)
 
         allTextViews.forEach { textView ->
             textView.setOnClickListener {
@@ -84,7 +91,7 @@ class HomeFragment : Fragment() {
         }
 
         // Configuración inicial en la carga de la Activity
-        updateTextStyles(tvInicio, allTextViews)  // Pone "Inicio" en negrita por defecto
+        updateTextStyles(tvBiblioteca, allTextViews)  // Pone "Inicio" en negrita por defecto
     }
     private fun updateTextStyles(selectedTextView: TextView, allTextViews: List<TextView>) {
         allTextViews.forEach { textView ->

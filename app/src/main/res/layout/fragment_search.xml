@@ -10,16 +10,16 @@
 
     <!-- RecyclerView para los resultados de las canciones -->
 
-    <ImageButton
-        android:id="@+id/imageButton7"
-        android:layout_width="145dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#00FFFFFF"
-        android:src="@drawable/grupo_10308"
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_marginTop="7dp"
+        android:src="@drawable/separador_h"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBox" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCanciones"
@@ -28,20 +28,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton7"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
         tools:listitem="@layout/song_item_list" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="142dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="18dp"
-        android:fontFamily="@font/poppins_light"
-        android:text="Resultados"
-        android:textColor="#FFFFFF"
-        android:textSize="19sp"
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="40dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerCrop"
+        android:src="@drawable/icon_search"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/searchBox"
+        android:layout_width="244dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        android:background="#00FFFFFF"
+        android:fontFamily="@font/poppins_light"
+        android:hint="Ingresa la búsqueda"
+        android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/imageButton7"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

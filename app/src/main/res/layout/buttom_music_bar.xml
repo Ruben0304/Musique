@@ -24,10 +24,10 @@
         android:scaleType="fitXY"
         app:srcCompat="@drawable/grupo_10391" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/playing_now_bar"
-        android:layout_width="0dp"
-        android:layout_height="86dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -41,13 +41,19 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/playing_now_card"
-            android:layout_width="291dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="50dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.08"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.80">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/playing_now_carda"
@@ -65,22 +71,23 @@
                     android:layout_height="match_parent"
                     android:background="#E40E0E0E" />
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"></LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="229dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="-270dp"
                         android:gravity="center_vertical"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="0.80">
 
                         <TextView
                             android:id="@+id/current_track_title"
@@ -89,7 +96,7 @@
                             android:fontFamily="@font/poppins_light"
                             android:text="Poblado"
                             android:textColor="#FFFFFF"
-                            android:textSize="8.5sp" />
+                            android:textSize="10sp" />
 
                         <TextView
                             android:id="@+id/current_track_artist"
@@ -98,19 +105,26 @@
                             android:fontFamily="@font/poppins_light"
                             android:text="J Balvin, Karol G, Nicky Jam"
                             android:textColor="#B3FFFFFF"
-                            android:textSize="5.5sp" />
+                            android:textSize="7sp" />
 
                     </LinearLayout>
 
                     <ImageButton
                         android:id="@+id/btnAmpliar"
-                        android:layout_width="16dp"
-                        android:layout_height="17dp"
-                        android:layout_marginTop="12dp"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="32dp"
                         android:background="#00FFFFFF"
-                        android:scaleType="centerInside"
+                        android:scaleType="fitXY"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_default="percent"
+                        app:layout_constraintHeight_percent="0.25"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent="0.07"
                         app:srcCompat="@drawable/menu" />
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -123,8 +137,7 @@
         </androidx.cardview.widget.CardView>
 
 
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.example.myapplication.ui.shared.MenuComponent
         android:id="@+id/menu_nav"

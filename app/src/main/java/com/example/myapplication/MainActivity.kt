@@ -20,6 +20,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.ViewPropertyAnimatorListener
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.palette.graphics.Palette
@@ -39,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val trackViewModel: TrackViewModel by viewModels()
 
+
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +51,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         AudioPlayer.initializePlayer(this)
-        hideSystemUI()
+//        hideSystemUI()
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController = navHostFragment.navController
 
         val includedLayout: View = findViewById(R.id.include_playing_bar)
@@ -102,20 +107,61 @@ class MainActivity : AppCompatActivity() {
 
         val btnAmpliar: ImageButton = includedLayout.findViewById(R.id.btnAmpliar)
 
-        val imgTransp: ImageView = menuNav.findViewById(R.id.imageView8)
 
+        val menuDown: ImageButton = menuNav.findViewById(R.id.imageButton3)
 
+        menuDown.setOnClickListener {
+
+            cardView.visibility = View.VISIBLE
+
+            cardView.alpha = 0f
+
+            ViewCompat.animate(cardView)
+                .alpha(1f)
+                .setDuration(200)
+                .setListener(null)
+                .start()
+
+            // Ocultar con animación de desvanecimiento
+            ViewCompat.animate(menuNav)
+                .alpha(0f)
+                .setDuration(200)
+                .setListener(object : ViewPropertyAnimatorListener {
+                    override fun onAnimationStart(view: View) {
+                        // No-op
+                    }
+
+                    override fun onAnimationEnd(view: View) {
+                        menuNav.visibility = View.GONE
+
+                    }
+
+                    override fun onAnimationCancel(view: View) {
+                        // No-op
+                    }
+                })
+                .start()
+        }
 
         btnAmpliar.setOnClickListener {
-            imgTransp.visibility = View.VISIBLE
-            menuNav.visibility = if (menuNav.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+            // Mostrar con animación de desvanecimiento
+            cardView.visibility = View.GONE
+            menuNav.visibility = View.VISIBLE
 
+            menuNav.alpha = 0f
+
+            ViewCompat.animate(menuNav)
+                .alpha(1f)
+                .setDuration(200)
+                .setListener(null)
+                .start()
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
     fun hideSystemUI() {
-        window.attributes.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+        window.attributes.layoutInDisplayCutoutMode =
+            WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                 )
