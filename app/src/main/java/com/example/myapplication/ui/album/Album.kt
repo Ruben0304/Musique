@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.R
-import com.example.myapplication.ui.home.SongAdapter
+import com.example.myapplication.ui.adapters.SongAdapter
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 
@@ -40,7 +40,7 @@ class Album : AppCompatActivity() {
         txtNombre = findViewById(R.id.txtNombre)
         recyclerView = findViewById(R.id.recyclerViewCanciones)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = SongAdapter(true,true)
+        recyclerView.adapter = SongAdapter()
         val imgCovre = findViewById<ImageView>(R.id.imageView4dffdf)
         val imgtrans = findViewById<ImageView>(R.id.imageView4fdf)
         val drawableId = resources.getIdentifier("grupo_10391", "drawable", packageName)
@@ -72,7 +72,7 @@ class Album : AppCompatActivity() {
     private fun setupRecyclerView() {
         recyclerView = findViewById(R.id.recyclerViewCanciones)
         // Ahora también pasas this como listener
-        adapter = SongAdapter(true, true)
+        adapter = SongAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
     }
@@ -81,7 +81,7 @@ class Album : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.cancionesLiveData.observe(this) { songs ->
             if (songs != null) {
-                adapter.updateList(songs, adapter.useListLayout, adapter.useButton)
+                adapter.updateList(songs)
             }
         }
 

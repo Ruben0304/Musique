@@ -114,7 +114,7 @@
             android:layout_height="731dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/datePickerFilter">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -134,13 +134,13 @@
                     android:id="@+id/cardView2"
                     android:layout_width="170dp"
                     android:layout_height="173dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="25dp"
                     app:cardBackgroundColor="#83292323"
                     app:cardCornerRadius="100dp"
                     app:cardElevation="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
                         android:id="@+id/imageView"
@@ -153,7 +153,7 @@
                     android:id="@+id/txtNumber1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/poppins_light"
                     android:text="Daddy Yanquee"
                     android:textColor="#FFFFFF"
@@ -161,28 +161,22 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="234dp"
-                    android:layout_height="31dp"
-                    android:layout_marginTop="40dp"
-                    android:background="#00FFFFFF"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/imageView12"
-                    android:layout_width="253dp"
-                    android:layout_height="33dp"
-                    android:layout_marginTop="40dp"
-                    android:src="@drawable/grupo_10367"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.504"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+        <DatePicker
+            android:id="@+id/datePickerFilter"
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:dayOfWeekBackground="#F8FFFFFF"
+            android:fitsSystemWindows="false"
+            android:headerYearTextAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

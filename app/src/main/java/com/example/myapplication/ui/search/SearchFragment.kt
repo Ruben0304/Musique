@@ -7,18 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.ProgressBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSearchBinding
-import com.example.myapplication.ui.home.SongAdapter
+import com.example.myapplication.ui.adapters.SongAdapter
 
 class SearchFragment : Fragment() {
 
@@ -38,7 +33,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = SongAdapter(true, true)
+        adapter = SongAdapter()
         binding.recyclerViewCanciones.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewCanciones.adapter = adapter
 
@@ -75,7 +70,7 @@ class SearchFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.cancionesLiveData.observe(viewLifecycleOwner, Observer { songs ->
-            adapter.updateList(songs, adapter.useListLayout, adapter.useButton)
+            adapter.updateList(songs)
         })
         viewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             binding.loadingBar.visibility = if (isLoading) View.VISIBLE else View.GONE

@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.charts
+package com.example.myapplication.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View

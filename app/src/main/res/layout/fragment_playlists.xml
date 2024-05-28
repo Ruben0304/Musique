@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +8,52 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#000000">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="130dp"
+            android:layout_height="39dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="48dp"
+            app:cardBackgroundColor="#191919"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppins_light"
+                android:paddingStart="12dp"
+                android:paddingTop="8dp"
+                android:text="Modo Aleatorio"
+                android:textColor="#FFFFFF" />
+        </androidx.cardview.widget.CardView>
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="144dp"
+            android:layout_height="78dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="28dp"
+            android:background="#00B69898"
+            android:scaleType="centerInside"
+            android:src="@drawable/group_10308"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingHorizontal="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageButton3"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.65"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
