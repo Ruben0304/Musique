@@ -1,7 +1,7 @@
-package com.example.myapplication.service
+package com.example.myapplication.api
 import com.example.myapplication.model.Song
-import com.example.myapplication.model.TrackResponse
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +10,6 @@ import java.io.IOException
 
 
 
-//            val url = "https://script.google.com/macros/s/AKfycbylYkJGlnrGT7b3Fu3voVpviFIYs1q92VHnkJwMnxA0JzOonytMqZ59mAgxu5_oPjSrDw/exec?action=search&q=$query"
 
 class SongSearchService : ISongSearchService {
     private val client = OkHttpClient()
@@ -18,7 +17,7 @@ class SongSearchService : ISongSearchService {
 
     override suspend fun fetchTracks(query: String): List<Song>? = withContext(Dispatchers.IO) {
         try {
-            val url = "https://api.deezer.com/search?q=$query"
+            val url = "https://script.google.com/macros/s/AKfycbylYkJGlnrGT7b3Fu3voVpviFIYs1q92VHnkJwMnxA0JzOonytMqZ59mAgxu5_oPjSrDw/exec?action=search&q=$query"
             val request = Request.Builder()
                 .url(url)
                 .addHeader("Accept", "application/json")
@@ -30,8 +29,8 @@ class SongSearchService : ISongSearchService {
                 val responseBody = response.body?.string()
                 responseBody?.let {
                     // Deserializa la respuesta completa incluyendo los datos de las pistas
-                    val trackResponse = gson.fromJson(it, TrackResponse::class.java)
-                    return@withContext trackResponse.data
+                    val trackResponse = gson.fromJson(it, object : TypeToken<List<Song>>() {}.type) as List<Song>
+                    return@withContext trackResponse
                 }
             }
             return@withContext null

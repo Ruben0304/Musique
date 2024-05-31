@@ -12,7 +12,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.R
-import com.example.myapplication.model.Song
+import com.example.myapplication.model.Track
+import com.example.myapplication.repository.AlbumRepository
+import com.example.myapplication.repository.ArtistRepository
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -23,7 +25,7 @@ import java.io.IOException
 class SharedCardGenerator() {
 
     companion object {
-        suspend fun createShareImage(context: Context, song: Song): Bitmap = withContext(Dispatchers.Main) {
+        suspend fun createShareImage(context: Context, song: Track): Bitmap = withContext(Dispatchers.Main) {
             // Inflar y preparar el layout en el hilo principal
             val inflater = LayoutInflater.from(context)
             val shareView = inflater.inflate(R.layout.share_card, null)
@@ -33,13 +35,13 @@ class SharedCardGenerator() {
             val artistView = shareView.findViewById<TextView>(R.id.txtArtista)
 
             titleView.text = song.title
-            artistView.text = song.artist.name
+            artistView.text = ArtistRepository.getArtistNamesByIds(song.artists)
 
             // Asegúrate de cargar la imagen de fondo de manera eficiente
             val bitmap = withContext(Dispatchers.IO) {
                 Glide.with(context)
                     .asBitmap()
-                    .load(song.album.coverXl) // Utiliza la URL o recurso correcto
+                    .load(AlbumRepository.getSongPicture(song.album_id)) // Utiliza la URL o recurso correcto
                     .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 10)))
                     .submit() // Ancho y alto para Instagram Story
                     .get() // Carga de forma sincrónica dentro de Dispatchers.IO
@@ -48,7 +50,7 @@ class SharedCardGenerator() {
             val bitmap2 = withContext(Dispatchers.IO) {
                 Glide.with(context)
                     .asBitmap()
-                    .load(song.album.coverXl) // Utiliza la URL o recurso correcto
+                    .load(AlbumRepository.getSongPicture(song.album_id)) // Utiliza la URL o recurso correcto
                     .apply(RequestOptions().transform(RoundedCorners(40))) // Aplica un borde redondeado con un radio de 20
                     .submit() // Puedes especificar el tamaño o dejarlo para que Glide determine las dimensiones
                     .get() // Carga de forma sincrónica dentro de Dispatchers.IO

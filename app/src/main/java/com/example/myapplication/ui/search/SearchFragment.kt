@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSearchBinding
+import com.example.myapplication.ui.adapters.SearchSongAdapter
 import com.example.myapplication.ui.adapters.SongAdapter
 
 class SearchFragment : Fragment() {
@@ -20,7 +21,7 @@ class SearchFragment : Fragment() {
     private val viewModel: SearchViewModel by viewModels()
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: SongAdapter
+    private lateinit var adapter: SearchSongAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +34,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = SongAdapter()
+        adapter = SearchSongAdapter()
         binding.recyclerViewCanciones.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewCanciones.adapter = adapter
 

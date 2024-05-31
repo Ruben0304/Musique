@@ -19,12 +19,15 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.R
 import com.example.myapplication.model.PlaylistManager
 import com.example.myapplication.model.Song
+import com.example.myapplication.model.Track
+import com.example.myapplication.repository.AlbumRepository
+import com.example.myapplication.repository.ArtistRepository
 import com.example.myapplication.service.ReproductorMusica
 
 @SuppressLint("StaticFieldLeak")
 object PlaylistSongAdapter : RecyclerView.Adapter<PlaylistSongAdapter.SongViewHolder>() {
 
-    private var songsList: MutableList<Song> = PlaylistManager.getSongs().toMutableList()
+    private var songsList: MutableList<Track> = PlaylistManager.getSongs().toMutableList()
     var currentExpandedImg: ImageView? = null
     var currentExpandedView: CardView? = null
 
@@ -41,7 +44,7 @@ object PlaylistSongAdapter : RecyclerView.Adapter<PlaylistSongAdapter.SongViewHo
 
     override fun getItemCount() = songsList.size
 
-    fun updateList(newSongs: List<Song>) {
+    fun updateList(newSongs: List<Track>) {
         PlaylistManager.songsList = newSongs.toMutableList()
         songsList = newSongs.toMutableList()
         notifyDataSetChanged()
@@ -55,13 +58,13 @@ object PlaylistSongAdapter : RecyclerView.Adapter<PlaylistSongAdapter.SongViewHo
         private val btnCancelar: ImageButton? = itemView.findViewById(R.id.imageButton4)
         private val cardView: CardView? = itemView.findViewById(R.id.cardView)
 
-        fun bind(song: Song) {
+        fun bind(song: Track) {
             titleTextView.text = song.title
-            artistTextView.text = song.artist.name
+            artistTextView.text = ArtistRepository.getArtistNamesByIds(song.artists)
 
 
             Glide.with(imageView.context)
-                .load(song.album.coverMedium)
+                .load(AlbumRepository.getSongPicture(song.album_id))
                 .apply(RequestOptions().format(DecodeFormat.PREFER_ARGB_8888).fitCenter())
                 .into(imageView)
 

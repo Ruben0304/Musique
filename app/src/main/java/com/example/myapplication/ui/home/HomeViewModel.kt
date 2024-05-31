@@ -5,41 +5,39 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.model.Song
-import com.example.myapplication.service.ISongSearchService
-import com.example.myapplication.service.SongSearchService
+import com.example.myapplication.api.ISongSearchService
+import com.example.myapplication.api.SongSearchService
+import com.example.myapplication.model.Track
+import com.example.myapplication.repository.SongRepository
 
 import kotlinx.coroutines.launch
 
 
 
-class HomeViewModel(
-) : ViewModel() {
-
-    private val songService: ISongSearchService = SongSearchService()
-    private val _cancionesLiveData = MutableLiveData<List<Song>>()
-    val cancionesLiveData: LiveData<List<Song>> = _cancionesLiveData
+class HomeViewModel : ViewModel() {
+    private val _tracksLiveData = MutableLiveData<List<Track>>()
+    val tracksLiveData: LiveData<List<Track>> = _tracksLiveData
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
     init {
-        // Iniciar una búsqueda inicial o cargar datos iniciales
-        searchTracks("Saiko")
+        loadTracks()
     }
 
-    fun searchTracks(query: String) {
+    fun loadTracks() {
         _isLoading.value = true
         viewModelScope.launch {
             try {
-                val songItems = songService.fetchTracks(query)
-                _cancionesLiveData.value = songItems ?: emptyList()
-                _isLoading.value = false
+                val tracks = SongRepository.tracks.values.toList()
+                _tracksLiveData.value = tracks
             } catch (e: Exception) {
-                // Manejar la excepción, como mostrar un mensaje de error
-                _isLoading.value = false
+                _tracksLiveData.value = emptyList() // En caso de excepción, asignar una lista vacía
             }
+            _isLoading.value = false
         }
     }
 }
+
 
 

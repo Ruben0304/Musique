@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
-import com.example.myapplication.model.Album
+
 import com.example.myapplication.model.Song
 import com.example.myapplication.service.ReproductorMusica
 import com.example.myapplication.ui.player.Player
@@ -20,7 +20,7 @@ import com.example.myapplication.ui.shared.SongMenuActivity
 
 
 class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.SongViewHolder>() {
-    private var albumList: List<Album> = listOf()
+//    private var albumList: List<Album> = listOf()
 
 
 
@@ -31,19 +31,22 @@ class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.SongViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
-        val album = albumList[position]
+//        val album = albumList[position]
 //        holder.bind(album)
     }
 
-    override fun getItemCount() = albumList.size
+//   override fun getItemCount() = albumList.size
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newSongs: List<Album>, useListLayout: Boolean, useButton: Boolean, ) {
-//        this.songsList = newSongs
-//        this.useListLayout = useListLayout
-//        this.useButton = useButton
-        notifyDataSetChanged()
-    }
+    override fun getItemCount() =3
+
+
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun updateList(newSongs: List<Album>, useListLayout: Boolean, useButton: Boolean, ) {
+////        this.songsList = newSongs
+////        this.useListLayout = useListLayout
+////        this.useButton = useButton
+//        notifyDataSetChanged()
+//    }
 
     class SongViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.imagenCancion)

@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.model.Song
+import com.example.myapplication.model.Track
+import com.example.myapplication.repository.AlbumRepository
+import com.example.myapplication.repository.ArtistRepository
 import com.example.myapplication.service.DownloadService
 import com.example.myapplication.service.ReproductorMusica
 import com.example.myapplication.ui.player.Player
@@ -20,7 +23,7 @@ import com.example.myapplication.ui.shared.SongMenuActivity
 
 
 class SongAdapter : RecyclerView.Adapter<SongAdapter.SongViewHolder>() {
-    private var songsList: List<Song> = listOf()
+    private var songsList: List<Track> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
         val layoutId = R.layout.song_item_list
@@ -36,7 +39,7 @@ class SongAdapter : RecyclerView.Adapter<SongAdapter.SongViewHolder>() {
     override fun getItemCount() = songsList.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newSongs: List<Song>) {
+    fun updateList(newSongs: List<Track>) {
         this.songsList = newSongs
         notifyDataSetChanged()
     }
@@ -48,12 +51,12 @@ class SongAdapter : RecyclerView.Adapter<SongAdapter.SongViewHolder>() {
         private val btnDescargar: ImageButton? = itemView.findViewById(R.id.imageButton4)
         private val progress: ProgressBar? = itemView.findViewById(R.id.progressBar)
 
-        fun bind(song: Song) {
+        fun bind(song: Track) {
             titleTextView.text = song.title
-            artistTextView.text = song.artist.name
+            artistTextView.text = ArtistRepository.getArtistNamesByIds(song.artists)
 
             Glide.with(imageView.context)
-                .load(song.album.coverMedium)
+                .load(AlbumRepository.getSongPicture(song.album_id))
                 .into(imageView)
 
             imageView.setOnClickListener {

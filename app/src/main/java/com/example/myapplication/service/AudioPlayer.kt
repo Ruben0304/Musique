@@ -6,21 +6,24 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.MainActivity
 import com.example.myapplication.TrackViewModel
 import com.example.myapplication.model.Song
+import com.example.myapplication.model.Track
+import com.example.myapplication.repository.AlbumRepository
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 
 
 object ReproductorMusica {
-    private var cancionActual: Song? = null
+    private var cancionActual: Track? = null
     public var idAReproducir : Long? = null
 
 
-    fun reproducir(cancion: Song) {
+    fun reproducir(cancion: Track) {
         ReproductorMusica.cancionActual = cancion
-        AudioPlayer.trackViewModel.updateTrackImage(cancion.album.coverMedium)
-        AudioPlayer.play(cancion.preview) // Asumiendo que usas URL para reproducir
+        AlbumRepository.getSongPicture(cancion.album_id)
+            ?.let { AudioPlayer.trackViewModel.updateTrackImage(it) }
+//        AudioPlayer.play(cancion.preview) // Asumiendo que usas URL para reproducir
     }
-    fun obtenerCancionActual(): Song? = cancionActual
+    fun obtenerCancionActual(): Track? = cancionActual
     fun obtenerIdAReproducir(): Long? = idAReproducir
 
     // Métodos de control de reproducción delegados a AudioPlayer

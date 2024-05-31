@@ -5,14 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.model.Song
-import com.example.myapplication.service.ISongSearchService
-import com.example.myapplication.service.SongSearchService
+import com.example.myapplication.api.ISongSearchService
+import com.example.myapplication.api.SongSearchService
+import com.example.myapplication.model.Track
 import kotlinx.coroutines.launch
 
 class PlaylistsViewModel : ViewModel() {
     private val songService: ISongSearchService = SongSearchService()
-    private val _cancionesLiveData = MutableLiveData<MutableList<Song>>()
-    val cancionesLiveData: LiveData<MutableList<Song>> = _cancionesLiveData
+    private val _cancionesLiveData = MutableLiveData<MutableList<Track>>()
+    val cancionesLiveData: LiveData<MutableList<Track>> = _cancionesLiveData
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -27,7 +28,7 @@ class PlaylistsViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val songItems = songService.fetchTracks(query)
-                _cancionesLiveData.value = (songItems ?: emptyList()) as MutableList<Song>?
+                _cancionesLiveData.value = null
                 _isLoading.value = false
             } catch (e: Exception) {
                 // Manejar la excepción, como mostrar un mensaje de error

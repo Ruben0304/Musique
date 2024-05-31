@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.model.Song
-import com.example.myapplication.service.ISongSearchService
-import com.example.myapplication.service.SongSearchService
+import com.example.myapplication.api.ISongSearchService
+import com.example.myapplication.api.SongSearchService
 import kotlinx.coroutines.launch
 
 class SearchViewModel : ViewModel() {

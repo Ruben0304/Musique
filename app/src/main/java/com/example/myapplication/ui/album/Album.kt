@@ -81,7 +81,7 @@ class Album : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.cancionesLiveData.observe(this) { songs ->
             if (songs != null) {
-                adapter.updateList(songs)
+//                adapter.updateList(songs)
             }
         }
 

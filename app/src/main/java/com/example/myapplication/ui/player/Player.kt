@@ -2,7 +2,6 @@ package com.example.myapplication.ui.player
 
 import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.media.AudioManager
 import android.os.Build
@@ -28,8 +27,11 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.R
-import com.example.myapplication.model.Album
-import com.example.myapplication.model.Song
+
+
+import com.example.myapplication.model.Track
+import com.example.myapplication.repository.AlbumRepository
+import com.example.myapplication.repository.ArtistRepository
 import com.example.myapplication.service.AudioPlayer
 import com.example.myapplication.service.ReproductorMusica
 import com.example.myapplication.ui.util.SharedCardGenerator
@@ -70,25 +72,28 @@ class Player : AppCompatActivity() {
         }
     }
 
-    private fun updateUI(songInfo: Song) {
+    private fun updateUI(songInfo: Track) {
         val listaRepfdf = findViewById<CardView>(R.id.listaRepfdf)
         songInfo.let {
             txtTitulo.text = it.title
-            txtArtista.text = it.artist.name
+
+            txtArtista.text = ArtistRepository.getArtistNamesByIds(it.artists)
+
             txtDuracion.text = formatTime(it.duration.toLong())
+
             Glide.with(this)
-                .load(it.album.coverBig) // Reemplaza con tu drawable o uri
+                .load(AlbumRepository.getSongPicture(it.album_id)) // Reemplaza con tu drawable o uri
                 .apply(RequestOptions.bitmapTransform(BlurTransformation(25,10))) // Ajusta el radio y el muestreo
                 .into(findViewById(R.id.background))
 
             Glide.with(this)
-                .load(it.album.coverBig) // Reemplaza con tu drawable o uri
+                .load(AlbumRepository.getSongPicture(it.album_id)) // Reemplaza con tu drawable o uri
                 .into(findViewById(R.id.cover))
 
 
             listaRepfdf.setOnClickListener {
                 lifecycleScope.launch {
-                    songInfo?.let { cancion ->
+                    songInfo.let { cancion ->
                         val bitmap = SharedCardGenerator.createShareImage(this@Player, cancion)
                         val fileName = "SharedImage_${System.currentTimeMillis()}"
                         saveImageToGallery(this@Player, bitmap, fileName)
@@ -253,10 +258,10 @@ class Player : AppCompatActivity() {
             val artistName = txtArtista.text.toString()
 
             // Crear un Intent para iniciar ArtistDetailsActivity
-            val intent = Intent(this, Album::class.java).apply {
-                // Pasar el nombre del artista como extra en el Intent
-
-            }
+//            val intent = Intent(this, Album::class.java).apply {
+//                // Pasar el nombre del artista como extra en el Intent
+//
+//            }
             startActivity(intent)
         }
 
