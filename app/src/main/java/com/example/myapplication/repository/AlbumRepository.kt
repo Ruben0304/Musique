@@ -12,16 +12,5 @@ object AlbumRepository {
      }
 
 }
-object ArtistRepository {
-     var artists: HashMap<Long, Artist> = HashMap()
-
-     fun getArtistNamesByIds(artistIds: List<Long>): String {
-          return artistIds.mapNotNull { artists[it]?.name }
-               .joinToString(separator = ", ")
-     }
-}
 
 
-object SongRepository {
-     var tracks: HashMap<Long, Track> = HashMap()
-}

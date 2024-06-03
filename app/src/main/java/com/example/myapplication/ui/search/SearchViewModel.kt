@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.model.Song
-import com.example.myapplication.api.ISongSearchService
-import com.example.myapplication.api.SongSearchService
+import com.example.myapplication.api.SongSearcher
 import kotlinx.coroutines.launch
 
 class SearchViewModel : ViewModel() {
@@ -16,7 +15,7 @@ class SearchViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
-    private val songService: ISongSearchService = SongSearchService()
+    private val songService = SongSearcher()
 
     fun searchTracks(query: String) {
         _isLoading.value = true

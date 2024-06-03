@@ -11,11 +11,11 @@ import java.io.IOException
 
 
 
-class SongSearchService : ISongSearchService {
+class SongSearcher{
     private val client = OkHttpClient()
     private val gson = Gson()
 
-    override suspend fun fetchTracks(query: String): List<Song>? = withContext(Dispatchers.IO) {
+     suspend fun fetchTracks(query: String): List<Song>? = withContext(Dispatchers.IO) {
         try {
             val url = "https://script.google.com/macros/s/AKfycbylYkJGlnrGT7b3Fu3voVpviFIYs1q92VHnkJwMnxA0JzOonytMqZ59mAgxu5_oPjSrDw/exec?action=search&q=$query"
             val request = Request.Builder()
@@ -39,8 +39,4 @@ class SongSearchService : ISongSearchService {
             return@withContext null
         }
     }
-}
-
-interface ISongSearchService {
-    suspend fun fetchTracks(query: String): List<Song>?
 }

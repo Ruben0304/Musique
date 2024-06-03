@@ -21,9 +21,12 @@
         app:srcCompat="@drawable/volumen_contrast" />
 
     <androidx.cardview.widget.CardView
+
+        android:id="@+id/playing_now_card_amplied"
         android:layout_width="0dp"
         android:layout_height="230dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="25dp"
+        android:visibility="gone"
         app:cardBackgroundColor="#F8251F55"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"

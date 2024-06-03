@@ -19,6 +19,7 @@ import com.example.myapplication.repository.ArtistRepository
 import com.example.myapplication.service.DownloadService
 import com.example.myapplication.service.ReproductorMusica
 import com.example.myapplication.ui.player.Player
+import com.example.myapplication.ui.shared.MenuComponent
 import com.example.myapplication.ui.shared.SongMenuActivity
 
 
@@ -48,15 +49,21 @@ class SongAdapter : RecyclerView.Adapter<SongAdapter.SongViewHolder>() {
         private val imageView: ImageView = itemView.findViewById(R.id.imagenCancion)
         private val titleTextView: TextView = itemView.findViewById(R.id.tituloCancion)
         private val artistTextView: TextView = itemView.findViewById(R.id.artistaCancion)
-        private val btnDescargar: ImageButton? = itemView.findViewById(R.id.imageButton4)
-        private val progress: ProgressBar? = itemView.findViewById(R.id.progressBar)
+        private val btnDescargar: ImageButton = itemView.findViewById(R.id.imageButton4)
+        private lateinit var cover_url: String
+        private lateinit var artists: String
+
 
         fun bind(song: Track) {
+
+            artists = ArtistRepository.getArtistNamesByIds(song.artists)
+            cover_url = AlbumRepository.getSongPicture(song.album_id).toString()
+
             titleTextView.text = song.title
-            artistTextView.text = ArtistRepository.getArtistNamesByIds(song.artists)
+            artistTextView.text = artists
 
             Glide.with(imageView.context)
-                .load(AlbumRepository.getSongPicture(song.album_id))
+                .load(cover_url)
                 .into(imageView)
 
             imageView.setOnClickListener {
@@ -65,14 +72,16 @@ class SongAdapter : RecyclerView.Adapter<SongAdapter.SongViewHolder>() {
                 imageView.context.startActivity(intent)
             }
 
-            btnDescargar?.let { button ->
-                button.setOnClickListener {
-                    val downloadService = DownloadService.getInstance()
-                    val url = ""
-                    val filePath = "${itemView.context.getExternalFilesDir(null)}/${song.title}.mp3"
-                    downloadService?.addDownloadTask(url, filePath)
-                }
+
+            btnDescargar.setOnClickListener {
+                val location = IntArray(2)
+                btnDescargar.getLocationOnScreen(location)
+                val y = location[1]
+                val intent = SongMenuActivity.newIntent(btnDescargar.context, song.title, artists, cover_url, y.toFloat())
+                btnDescargar.context.startActivity(intent)
             }
+
+
         }
     }
 }

@@ -84,6 +84,7 @@ dependencies {
     implementation(libs.hokofly.hoko.blur)
     implementation(libs.timber)
     implementation(libs.androidx.palette)
+    implementation(libs.android.lottie)
 
 
 

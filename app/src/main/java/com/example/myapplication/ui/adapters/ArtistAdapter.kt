@@ -12,64 +12,63 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
+import com.example.myapplication.model.Artist
 
 import com.example.myapplication.model.Song
-import com.example.myapplication.model.Track
-import com.example.myapplication.repository.AlbumRepository
-import com.example.myapplication.repository.ArtistRepository
 import com.example.myapplication.service.ReproductorMusica
+import com.example.myapplication.ui.album.AlbumActivity
+import com.example.myapplication.ui.artist.ArtistActivity
 import com.example.myapplication.ui.player.Player
 import com.example.myapplication.ui.shared.SongMenuActivity
 
 
-class SongGridAdapter: RecyclerView.Adapter<SongGridAdapter.SongViewHolder>() {
-    private var songsList: List<Track> = listOf()
+class ArtistAdapter: RecyclerView.Adapter<ArtistAdapter.SongViewHolder>() {
+    private var artistList: List<Artist> = listOf()
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
-        val layoutId =  R.layout.song_item_grid
+        val layoutId =  R.layout.artist_item_grid
         val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
         return SongViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
-        val song = songsList[position]
-        holder.bind(song)
+        val artist = artistList[position]
+        holder.bind(artist)
     }
 
+   override fun getItemCount() = artistList.size
 
 
-    override fun getItemCount() = songsList.size
+
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newSongs: List<Track> ) {
-        this.songsList = newSongs
+    fun updateList(newSongs: List<Artist>) {
+       this.artistList = newSongs
         notifyDataSetChanged()
     }
 
     class SongViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val imageView: ImageView = itemView.findViewById(R.id.imagenCancion)
-        private val titleTextView: TextView = itemView.findViewById(R.id.tituloCancion)
-        private val artistTextView: TextView = itemView.findViewById(R.id.artistaCancion)
+        private val imageView: ImageView = itemView.findViewById(R.id.imagenArtista)
+        private val titleTextView: TextView = itemView.findViewById(R.id.tituloArtista)
 
 
-        fun bind(song: Track) {
-            titleTextView.text = song.title
-            artistTextView.text = ArtistRepository.getArtistNamesByIds(song.artists)
+        fun bind(artist: Artist) {
+            titleTextView.text = artist.name
+
 
             Glide.with(imageView.context)
-                .load(AlbumRepository.albums.get(song.album_id)?.pictureUrl)
+                .load(artist.pictureUrl)
                 .into(imageView)
 
             imageView.setOnClickListener {
-//                ReproductorMusica.idAReproducir = song.id
-                ReproductorMusica.reproducir(song)
-                val intent = Intent(imageView.context, Player::class.java)
-
-
+                val intent = ArtistActivity.newIntent(imageView.context, artist.id)
                 imageView.context.startActivity(intent)
             }
-
         }
 
     }
+
+
 }

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".ui.album.AlbumActivity">
+
+    <ImageView
+        android:id="@+id/imageView4dffdf"
+        android:layout_width="0dp"
+        android:layout_height="345dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/_000x1000" />
+
+    <ImageView
+        android:id="@+id/imageView4fdf"
+        android:layout_width="0dp"
+        android:layout_height="346dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/grupo_10391"
+        tools:ignore="UnknownId" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCanciones"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4dffdf"
+        tools:listitem="@layout/song_item_list" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="60dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="24dp"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4dffdf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/icon_back" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="45dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="24dp"
+        android:background="#00FFFFFF"
+
+        android:elevation="3dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4fdf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/icon_playall" />
+
+    <TextView
+        android:id="@+id/txtNombre"
+        android:layout_width="246dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="36dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/poppins_light"
+        android:singleLine="true"
+        android:text="Nadie sabe lo que va a pasar mañana"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4dffdf"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

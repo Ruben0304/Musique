@@ -29,11 +29,20 @@
 
 
         <activity
-            android:name=".ui.album.Album"
+            android:name=".ui.album.AlbumActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
-            android:label="@string/title_activity_artist_album"
+            android:label="Album"
             android:theme="@style/Theme.MyApplication.Fullscreen" />
+
+        <activity
+            android:name=".ui.artist.ArtistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:label="Artist"
+            android:theme="@style/Theme.MyApplication.Fullscreen" />
+
+
         <activity
             android:name=".ui.player.Player"
             android:configChanges="orientation|keyboardHidden|screenSize"

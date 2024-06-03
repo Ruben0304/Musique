@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.album
+package com.example.myapplication.ui.artist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +12,7 @@ import com.example.myapplication.repository.SongRepository
 import kotlinx.coroutines.launch
 
 
-class AlbumViewModel : ViewModel() {
+class ArtistViewModel : ViewModel() {
 
 
     // LiveData que almacena la lista de canciones
@@ -22,10 +22,10 @@ class AlbumViewModel : ViewModel() {
 
 
     // Función para buscar canciones basada en el ID
-    fun fetchSongsById(albumId: Long) {
+    fun fetchSongsById(artistId: Long) {
         viewModelScope.launch {
             try {
-                val songItems = SongRepository.getTracksByAlbumId(albumId)
+                val songItems = SongRepository.getTracksByArtistId(artistId)
                 _cancionesLiveData.value = songItems
             } catch (e: Exception) {
                 // Manejo de errores, podrías agregar un LiveData para errores si lo consideras necesario

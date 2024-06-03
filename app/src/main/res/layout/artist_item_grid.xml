@@ -1,49 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
-    android:orientation="vertical"
     android:paddingHorizontal="8dp"
-    android:paddingVertical="25dp">
+    android:paddingVertical="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="1.0"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="25dp">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="172dp"
-            android:layout_height="210dp"
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:cardBackgroundColor="#00FFFFFF"
             app:cardCornerRadius="16dp"
-            app:cardPreventCornerOverlap="true">
+            app:cardPreventCornerOverlap="true"
+            app:layout_constraintDimensionRatio="180:227"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imagenCancion"
+                android:id="@+id/imagenArtista"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="13dp" />
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/tituloCancion"
-            android:layout_width="wrap_content"
+            android:id="@+id/tituloArtista"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12sp"
             android:ellipsize="end"
             android:fontFamily="@font/poppins_light"
             android:singleLine="true"
-            android:text="Canción"
+            android:text="Artista"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

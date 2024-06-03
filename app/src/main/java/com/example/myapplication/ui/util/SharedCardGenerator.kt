@@ -77,9 +77,11 @@ class SharedCardGenerator() {
         suspend fun saveImageToStorage(context: Context, bitmap: Bitmap, fileName: String) {
             val file = File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "$fileName.jpg")
             try {
-                FileOutputStream(file).use { out ->
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
-                    out.flush()
+                withContext(Dispatchers.IO) {
+                    FileOutputStream(file).use { out ->
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+                        out.flush()
+                    }
                 }
             } catch (e: IOException) {
                 e.printStackTrace()

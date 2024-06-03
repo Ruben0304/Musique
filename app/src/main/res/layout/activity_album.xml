@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".ui.Artist_Album">
+    tools:context=".ui.album.AlbumActivity">
 
     <ImageView
         android:id="@+id/imageView4dffdf"
@@ -30,8 +30,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/rectangle_3378"
+        app:srcCompat="@drawable/grupo_10391"
         tools:ignore="UnknownId" />
+
+    <TextView
+        android:id="@+id/txtArtista"
+        android:layout_width="246dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="20dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/poppins_light"
+        android:singleLine="true"
+        android:text="Anuel AA"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4dffdf"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCanciones"
@@ -48,7 +63,7 @@
         android:layout_width="60dp"
         android:layout_height="53dp"
         android:layout_marginStart="4dp"
-        android:layout_marginBottom="276dp"
+        android:layout_marginBottom="24dp"
         android:scaleType="center"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4dffdf"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,27 +71,30 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="57dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="20dp"
+        android:layout_width="45dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="24dp"
         android:background="#00FFFFFF"
 
         android:elevation="3dp"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4fdf"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/icon_playall" />
 
     <TextView
         android:id="@+id/txtNombre"
-        android:layout_width="236dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="246dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="50dp"
+        android:ellipsize="end"
         android:fontFamily="@font/poppins_light"
+        android:singleLine="true"
         android:text="Nadie sabe lo que va a pasar mañana"
         android:textColor="#FFFFFF"
-        android:textSize="21sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4dffdf"
         app:layout_constraintStart_toStartOf="parent" />
 

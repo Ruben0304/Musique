@@ -34,7 +34,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = SearchSongAdapter()
+        adapter = SearchSongAdapter(requireContext())
         binding.recyclerViewCanciones.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewCanciones.adapter = adapter
 

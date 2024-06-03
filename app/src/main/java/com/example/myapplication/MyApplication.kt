@@ -1,7 +1,10 @@
 package com.example.myapplication
 
 import android.app.Application
-import com.example.myapplication.json.MetadataLoader
+import com.example.myapplication.api.FetchMetadata
+import com.example.myapplication.metadata.MetadataDownloader
+import com.example.myapplication.metadata.MetadataLoader
+import com.example.myapplication.metadata.MetadataSaver
 import com.example.myapplication.repository.AlbumRepository
 import com.example.myapplication.repository.ArtistRepository
 import com.example.myapplication.repository.SongRepository
@@ -19,14 +22,8 @@ class MyApplication : Application() {
             Timber.plant(Timber.DebugTree())
         }
 
-         val  metadataLoader = MetadataLoader()
-         metadataLoader.load()
-         SongRepository.tracks.putIfAbsent(metadataLoader.track.id, metadataLoader.track)
-         AlbumRepository.albums.putIfAbsent(metadataLoader.album.id, metadataLoader.album)
 
-        metadataLoader.artistas.forEach {
-            ArtistRepository.artists.putIfAbsent(it.id, it)
-        }
+
 
 
 

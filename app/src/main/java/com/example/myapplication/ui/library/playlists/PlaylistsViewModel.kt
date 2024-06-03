@@ -4,14 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.api.SongSearcher
 import com.example.myapplication.model.Song
-import com.example.myapplication.api.ISongSearchService
-import com.example.myapplication.api.SongSearchService
 import com.example.myapplication.model.Track
 import kotlinx.coroutines.launch
 
 class PlaylistsViewModel : ViewModel() {
-    private val songService: ISongSearchService = SongSearchService()
+    private val songService: SongSearcher = SongSearcher()
     private val _cancionesLiveData = MutableLiveData<MutableList<Track>>()
     val cancionesLiveData: LiveData<MutableList<Track>> = _cancionesLiveData
 

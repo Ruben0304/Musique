@@ -1,7 +1,12 @@
 package com.example.myapplication
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.graphics.Bitmap
@@ -12,9 +17,14 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.transition.Transition
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.BounceInterpolator
+import android.view.animation.OvershootInterpolator
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.activity.viewModels
@@ -35,7 +45,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.SimpleTarget
+import com.example.myapplication.api.FetchMetadata
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.metadata.MetadataDownloader
+import com.example.myapplication.metadata.MetadataLoaderFromJsons
+import com.example.myapplication.metadata.MetadataSaver
 
 
 import com.example.myapplication.service.AudioPlayer
@@ -48,7 +62,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val trackViewModel: TrackViewModel by viewModels()
-
+    private lateinit var vibrator: Vibrator
 
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -58,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         AudioPlayer.initializePlayer(this)
 //        hideSystemUI()
 
@@ -123,72 +138,27 @@ class MainActivity : AppCompatActivity() {
             findNavController(R.id.nav_host_fragment_activity_main).navigate(R.id.action_home_to_playlist)
         }
 
+
         menuDown.setOnClickListener {
+            expandView(cardView)
+            collapseView(menuNav.findViewById(R.id.playing_now_card_amplied))
 
-            cardView.visibility = View.VISIBLE
-
-            cardView.alpha = 0f
-
-            ViewCompat.animate(cardView)
-                .alpha(1f)
-                .setDuration(200)
-                .setListener(null)
-                .start()
-
-            // Ocultar con animación de desvanecimiento
-            ViewCompat.animate(menuNav)
-                .alpha(0f)
-                .setDuration(200)
-                .setListener(object : ViewPropertyAnimatorListener {
-                    override fun onAnimationStart(view: View) {
-                        // No-op
-                    }
-
-                    override fun onAnimationEnd(view: View) {
-                        menuNav.visibility = View.GONE
-
-                    }
-
-                    override fun onAnimationCancel(view: View) {
-                        // No-op
-                    }
-                })
-                .start()
         }
 
         btnAmpliar.setOnClickListener {
-            // Mostrar con animación de desvanecimiento
-            cardView.visibility = View.GONE
-            menuNav.visibility = View.VISIBLE
-
-            menuNav.alpha = 0f
-
-            ViewCompat.animate(menuNav)
-                .alpha(1f)
-                .setDuration(200)
-                .setListener(null)
-                .start()
-        }
-
-        cardView.setOnClickListener {
-            // Mostrar con animación de desvanecimiento
-            cardView.visibility = View.GONE
-            menuNav.visibility = View.VISIBLE
-
-            menuNav.alpha = 0f
-
-            ViewCompat.animate(menuNav)
-                .alpha(1f)
-                .setDuration(200)
-                .setListener(null)
-                .start()
+            expandView(menuNav.findViewById(R.id.playing_now_card_amplied))
+            collapseView(cardView)
         }
 // Iniciar el servicio
         Intent(this, DownloadService::class.java).also { intent ->
             startService(intent)
         }
 
+        val metadataLoaderFromJsons = MetadataLoaderFromJsons(this)
+        metadataLoaderFromJsons.loadAll()
 
+//        val  metadataDownloader = MetadataDownloader(this,FetchMetadata(), MetadataSaver(this))
+//        metadataDownloader.download(2403815945)
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -198,5 +168,56 @@ class MainActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                 )
+    }
+
+    private fun expandView(view: View) {
+        view.apply {
+            visibility = View.VISIBLE
+            alpha = 0f
+            scaleX = 0.5f
+            scaleY = 0.5f
+            animate()
+                .alpha(1f)
+                .scaleX(1.1f)
+                .scaleY(1.1f)
+                .setDuration(250)
+                .setInterpolator(OvershootInterpolator())
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        view.animate()
+                            .scaleX(1f)
+                            .scaleY(1f)
+                            .setDuration(100)
+                            .setInterpolator(BounceInterpolator())
+                            .setListener(null)
+                        vibratePhone()
+                    }
+                })
+        }
+    }
+
+    private fun collapseView(view: View) {
+        view.apply {
+            animate()
+                .alpha(0f)
+                .scaleX(0.5f)
+                .scaleY(0.5f)
+                .setDuration(300)
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        view.visibility = View.GONE
+                        vibratePhone()
+                    }
+                })
+        }
+    }
+
+    private fun vibratePhone() {
+        if (vibrator.hasVibrator()) {
+            val vibrationEffect =
+                VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(vibrationEffect)
+        }
     }
 }

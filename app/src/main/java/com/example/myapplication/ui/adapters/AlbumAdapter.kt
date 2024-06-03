@@ -12,15 +12,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
+import com.example.myapplication.model.Album
 
 import com.example.myapplication.model.Song
+import com.example.myapplication.repository.ArtistRepository
 import com.example.myapplication.service.ReproductorMusica
+import com.example.myapplication.ui.album.AlbumActivity
 import com.example.myapplication.ui.player.Player
 import com.example.myapplication.ui.shared.SongMenuActivity
 
 
 class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.SongViewHolder>() {
-//    private var albumList: List<Album> = listOf()
+    private var albumList: List<Album> = listOf()
 
 
 
@@ -31,58 +34,36 @@ class AlbumAdapter: RecyclerView.Adapter<AlbumAdapter.SongViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
-//        val album = albumList[position]
-//        holder.bind(album)
+        val album = albumList[position]
+        holder.bind(album)
     }
 
-//   override fun getItemCount() = albumList.size
+  override fun getItemCount() = albumList.size
 
-    override fun getItemCount() =3
-
-
-//    @SuppressLint("NotifyDataSetChanged")
-//    fun updateList(newSongs: List<Album>, useListLayout: Boolean, useButton: Boolean, ) {
-////        this.songsList = newSongs
-////        this.useListLayout = useListLayout
-////        this.useButton = useButton
-//        notifyDataSetChanged()
-//    }
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(newSongs: List<Album> ) {
+        this.albumList = newSongs
+        notifyDataSetChanged()
+    }
 
     class SongViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.imagenCancion)
         private val titleTextView: TextView = itemView.findViewById(R.id.tituloCancion)
         private val artistTextView: TextView = itemView.findViewById(R.id.artistaCancion)
-        private val btnDescargar: ImageButton? = itemView.findViewById(R.id.imageButton4)
-        private val progress: ProgressBar? = itemView.findViewById(R.id.progressBar)
 
+        fun bind(album: Album) {
+            titleTextView.text = album.title
+            artistTextView.text = ArtistRepository.artists[album.artist_id]?.name
 
-//        fun bind(album: Album) {
-//            titleTextView.text = album.title
-////            artistTextView.text = song.artist_name
-//            artistTextView.text = album.title
-//
-//            Glide.with(imageView.context)
-////                .load(song.cover_small)
-//                .load(song.album.coverMedium)
-//                .into(imageView)
-//
-//            imageView.setOnClickListener {
-////                ReproductorMusica.idAReproducir = song.id
-//                ReproductorMusica.reproducir(song)
-//                val intent = Intent(imageView.context, Player::class.java)
-//
-//
-//                imageView.context.startActivity(intent)
-//            }
-//
-//
-//
-//        }
+            Glide.with(imageView.context)
+                .load(album.pictureUrl)
+                .into(imageView)
 
+            imageView.setOnClickListener {
+                val intent = AlbumActivity.newIntent(imageView.context, album.id)
+                imageView.context.startActivity(intent)
+            }
 
-
-
+        }
     }
-
-
 }
