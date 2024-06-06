@@ -46,7 +46,7 @@ class MetadataLoaderFromJsons (private val context: Context) {
                 throw IllegalArgumentException("Error parsing JSON from $fileName")
             }
         } else {
-            showErrorToast("No existing file found for $fileName. Initializing empty structure.")
+//            showErrorToast("No existing file found for $fileName. Initializing empty structure.")
             return hashMapOf<Long, T>() as T
         }
     }
