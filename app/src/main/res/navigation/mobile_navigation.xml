@@ -5,7 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/fragment_home">
 
-
     <fragment
         android:id="@+id/fragment_home"
         android:name="com.example.myapplication.ui.home.HomeFragment"
@@ -13,11 +12,10 @@
         <action
             android:id="@+id/action_home_to_search"
             app:destination="@id/fragment_search" />
-
-
+        <action
+            android:id="@+id/action_home_to_playlist"
+            app:destination="@id/fragment_playlist" />
     </fragment>
-
-
 
     <fragment
         android:id="@+id/fragment_search"
@@ -29,13 +27,18 @@
         android:name="com.example.myapplication.ui.library.playlists.PlaylistsFragment"
         android:label="Playlist" />
 
+    <fragment
+        android:id="@+id/fragment_download_center_empty"
+        android:name="com.example.myapplication.ui.download_center.empty.DownloadCenterFragmentEmpty"
+        android:label="DownloadCenterFragmentEmpty">
+        <action
+            android:id="@+id/action_empty_to_no_empty"
+            app:destination="@id/fragment_download_center" />
+    </fragment>
 
-    <action
-        android:id="@+id/action_home_to_playlist"
-        app:destination="@id/fragment_playlist" />
+    <fragment
+        android:id="@+id/fragment_download_center"
+        android:name="com.example.myapplication.ui.download_center.no_empty.DownloadCenterFragment"
+        android:label="DownloadCenterFragment" />
 
-
-
-
-    <!-- Otros fragmentos -->
 </navigation>

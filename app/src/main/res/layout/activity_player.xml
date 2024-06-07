@@ -10,6 +10,17 @@
     tools:context=".ui.player.Player">
 
     <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/_86x486bb_60__10_" />
+
+    <ImageView
         android:id="@+id/background"
         android:layout_width="0dp"
         android:layout_height="0dp"

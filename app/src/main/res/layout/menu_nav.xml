@@ -54,6 +54,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/itemLibrary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -87,6 +88,7 @@
                 android:src="@drawable/separador_h" />
 
             <LinearLayout
+                android:id="@+id/itemDownloads"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -119,6 +121,7 @@
                 android:src="@drawable/separador_h" />
 
             <LinearLayout
+                android:id="@+id/itemChart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

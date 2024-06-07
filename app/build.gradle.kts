@@ -85,6 +85,7 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.androidx.palette)
     implementation(libs.android.lottie)
+    implementation(libs.screenshot.detection)
 
 
 

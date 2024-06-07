@@ -107,14 +107,15 @@
                 android:layout_height="13dp"
                 android:src="@drawable/separador_h" />
 
-        </LinearLayout>
-
-        <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="731dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/datePickerFilter">
+            <DatePicker
+                android:id="@+id/datePickerFilter"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:calendarViewShown="false"
+                android:clipChildren="false"
+                android:datePickerMode="spinner"
+                android:fadeScrollbars="false"
+                android:headerYearTextAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -123,7 +124,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerCh"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -162,21 +163,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
 
-        <DatePicker
-            android:id="@+id/datePickerFilter"
-            android:layout_width="0dp"
-            android:layout_height="130dp"
-            android:calendarViewShown="false"
-            android:datePickerMode="spinner"
-            android:dayOfWeekBackground="#F8FFFFFF"
-            android:fitsSystemWindows="false"
-            android:headerYearTextAppearance="@style/TextAppearance.AppCompat.Display1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

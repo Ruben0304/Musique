@@ -34,6 +34,7 @@ okhttp = "4.9.1"
 activity = "1.8.0"
 palette = "1.0.0"
 roomRuntime = "2.6.1"
+screenshotDetection = "1.0.2"
 timber = "4.7.1"
 ui = "1.6.7"
 
@@ -77,6 +78,7 @@ androidx-legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+screenshot-detection = { module = "com.akexorcist:screenshot-detection", version.ref = "screenshotDetection" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 tonyodev-fetch2 = { module = "com.tonyodev.fetch2:fetch2", version.ref = "fetch2Version" }
 

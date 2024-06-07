@@ -2,24 +2,12 @@ package com.example.myapplication
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
-import android.app.AlertDialog
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
-import android.graphics.Bitmap
-import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
-import android.os.IBinder
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.transition.Transition
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -27,35 +15,27 @@ import android.view.animation.BounceInterpolator
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.ViewCompat
-import androidx.core.view.ViewPropertyAnimatorListener
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.target.SimpleTarget
-import com.example.myapplication.api.FetchMetadata
 import com.example.myapplication.databinding.ActivityMainBinding
-import com.example.myapplication.metadata.MetadataDownloader
 import com.example.myapplication.metadata.MetadataLoaderFromJsons
-import com.example.myapplication.metadata.MetadataSaver
 
 
 import com.example.myapplication.service.AudioPlayer
 import com.example.myapplication.service.DownloadService
-import com.example.myapplication.service.ReproductorMusica
-import com.example.myapplication.ui.player.Player
+import com.example.myapplication.ui.charts.ChartsFragment
+import com.example.myapplication.ui.download_center.empty.DownloadCenterFragmentEmpty
+import com.example.myapplication.ui.home.HomeFragment
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 
@@ -63,6 +43,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val trackViewModel: TrackViewModel by viewModels()
     private lateinit var vibrator: Vibrator
+    private lateinit var chartLink: LinearLayout
+    private lateinit var homeLink: LinearLayout
+    private lateinit var itemDownloads: LinearLayout
 
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -110,23 +93,6 @@ class MainActivity : AppCompatActivity() {
                 .load(imageUrl)
                 .into(currentTrackImageM)
 
-//            // Después de cargar la imagen, utiliza Palette para extraer el color predominante
-//            currentTrackImage.post {
-//                val bitmap = (currentTrackImage.drawable as BitmapDrawable).bitmap
-//                Palette.from(bitmap).generate { palette ->
-//                    val dominantColor = palette?.getDominantColor(Color.RED) ?: Color.RED
-//
-//                    // Crea un nuevo GradientDrawable con el color predominante
-//                    val drawable = GradientDrawable().apply {
-//                        shape = GradientDrawable.RECTANGLE
-//                        setColor(dominantColor) // Establece el color de fondo
-//                        cornerRadius = 50f // Debe coincidir con el radio de la tarjeta
-//                    }
-//
-//                    // Establece el nuevo drawable como fondo de cardView
-//                    cardView.background = drawable
-//                }
-//            }
         })
 
         val btnAmpliar: ImageButton = includedLayout.findViewById(R.id.btnAmpliar)
@@ -153,6 +119,59 @@ class MainActivity : AppCompatActivity() {
         Intent(this, DownloadService::class.java).also { intent ->
             startService(intent)
         }
+
+        val chartFragment = ChartsFragment()
+        val homeFramgent = HomeFragment()
+        val downloadsFragment = DownloadCenterFragmentEmpty()
+
+        chartLink = menuNav.findViewById(R.id.itemChart)
+        homeLink = menuNav.findViewById(R.id.itemLibrary)
+        itemDownloads = menuNav.findViewById(R.id.itemDownloads)
+
+        // Establece el OnClickListener para el elemento de menú
+        chartLink.setOnClickListener {
+
+            // Realiza la transacción de fragmento usando el FragmentManager
+            supportFragmentManager.beginTransaction().apply {
+                // Reemplaza el contenido del contenedor de fragmentos con el nuevo fragmento
+                replace(R.id.nav_host_fragment_activity_main, chartFragment)
+                // Opcionalmente, puedes añadir la transacción a la pila de retroceso si deseas que el usuario pueda volver atrás
+                addToBackStack(null)
+                // Confirma la transacción
+                commit()
+            }
+            menuDown.performClick()
+        }
+
+        homeLink.setOnClickListener {
+
+            // Realiza la transacción de fragmento usando el FragmentManager
+            supportFragmentManager.beginTransaction().apply {
+                // Reemplaza el contenido del contenedor de fragmentos con el nuevo fragmento
+                replace(R.id.nav_host_fragment_activity_main, homeFramgent)
+                // Opcionalmente, puedes añadir la transacción a la pila de retroceso si deseas que el usuario pueda volver atrás
+                addToBackStack(null)
+                // Confirma la transacción
+                commit()
+            }
+            menuDown.performClick()
+        }
+
+        itemDownloads.setOnClickListener {
+
+            // Realiza la transacción de fragmento usando el FragmentManager
+            supportFragmentManager.beginTransaction().apply {
+                // Reemplaza el contenido del contenedor de fragmentos con el nuevo fragmento
+                replace(R.id.nav_host_fragment_activity_main, downloadsFragment)
+                // Opcionalmente, puedes añadir la transacción a la pila de retroceso si deseas que el usuario pueda volver atrás
+                addToBackStack(null)
+                // Confirma la transacción
+                commit()
+            }
+            menuDown.performClick()
+        }
+
+
 
         val metadataLoaderFromJsons = MetadataLoaderFromJsons(this)
         metadataLoaderFromJsons.loadAll()
@@ -216,7 +235,7 @@ class MainActivity : AppCompatActivity() {
     private fun vibratePhone() {
         if (vibrator.hasVibrator()) {
             val vibrationEffect =
-                VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE)
+                VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE)
             vibrator.vibrate(vibrationEffect)
         }
     }
